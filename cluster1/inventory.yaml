@@ -1,0 +1,28 @@
+all:
+  hosts:
+    server1.cluster1.local:
+      ansible_host: kvm1
+      ansible_become: yes
+    server2.cluster1.local:
+      ansible_host: kvm2
+      ansible_become: yes
+  vars:
+    cluster_name: cluster1.local
+    #    kubectl.cluster.localhost: true
+    #kubeconfig.cluster.localhost: true
+kube-master:
+  hosts:
+    server1.cluster1.local:
+kube-node:
+  hosts:
+    server2.cluster1.local:
+  vars:
+    node_labels:
+      node-role.opencontrail.org: vrouter
+etcd:
+  hosts:
+    server1.cluster1.local:
+k8s-cluster:
+  children:
+    kube-master:
+    kube-node:
