@@ -8,8 +8,9 @@ all:
       ansible_become: yes
   vars:
     cluster_name: cluster1.local
-    #    kubectl.cluster.localhost: true
-    #kubeconfig.cluster.localhost: true
+    artifacts_dir: ~/kubespray-inventory/cluster1
+    kubectl.cluster.localhost: true
+    kubeconfig.cluster.localhost: true
 kube-master:
   hosts:
     server1.cluster1.local:

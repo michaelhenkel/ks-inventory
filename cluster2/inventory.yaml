@@ -1,0 +1,29 @@
+all:
+  hosts:
+    server3.cluster2.local:
+      ansible_host: kvm3
+      ansible_become: yes
+    server4.cluster2.local:
+      ansible_host: kvm4
+      ansible_become: yes
+  vars:
+    cluster_name: cluster2.local
+    artifacts_dir: ~/kubespray-inventory/cluster2
+    kubectl.cluster.localhost: true
+    kubeconfig.cluster.localhost: true
+kube-master:
+  hosts:
+    server3.cluster2.local:
+kube-node:
+  hosts:
+    server4.cluster2.local:
+  vars:
+    node_labels:
+      node-role.opencontrail.org: vrouter
+etcd:
+  hosts:
+    server3.cluster2.local:
+k8s-cluster:
+  children:
+    kube-master:
+    kube-node:

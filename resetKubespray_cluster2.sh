@@ -1,0 +1,12 @@
+#!/bin/bash
+cd ../kubespray && \
+ansible-playbook -i ../kubespray-inventory/cluster2/inventory.yaml reset.yml \
+  -e "kube_network_plugin=cni" \
+  -e "kube_network_plugin_multus=false" \
+  -e "override_system_hostname=false" \
+  -e "kubectl_localhost=true" \
+  -e "kubeconfig_localhost=true" \
+  -e "container_manager=crio" \
+  -e "kubelet_deployment_type=host" \
+  -e "download_container=false" \
+  -e "etcd_deployment_type=host"
